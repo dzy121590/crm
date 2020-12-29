@@ -4,13 +4,18 @@ import com.dzy.crm.base.ResultInfo;
 import com.dzy.crm.exceptions.ParamsException;
 import com.dzy.crm.model.UserModel;
 import com.dzy.crm.service.UserService;
+import com.dzy.crm.utils.LoginUserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+
+/**
+ * @author 董志远
+ */
 @Controller
 public class UserController {
 
@@ -19,6 +24,7 @@ public class UserController {
 
     /**
      * 用户登录
+     *
      * @param userName
      * @param passWord
      * @return
@@ -28,24 +34,30 @@ public class UserController {
     public ResultInfo login(String userName, String passWord) {
 
         ResultInfo resultInfo = new ResultInfo();
-        try {
-            UserModel userModel = userService.login(userName, passWord);
-            /*
-            1.用户信息放在session中
-            2.用户信息放在cookie中
-             */
-            resultInfo.setResult(userModel);
 
-        } catch (ParamsException e) {
-            e.printStackTrace();
-            resultInfo.setCode(e.getCode());
-            resultInfo.setMsg(e.getMsg());
-        }catch (Exception e) {
-            e.printStackTrace();
-            resultInfo.setCode(500);
-            resultInfo.setMsg("操作失败！");
-        }
+        UserModel userModel = userService.login(userName, passWord);
+
+        resultInfo.setResult(userModel);
+
         return resultInfo;
+    }
+
+
+    @PostMapping("/user/updatePwd")
+    @ResponseBody
+    public ResultInfo updatePwd(HttpServletRequest request, String oldPassWord, String newPassWord, String confirmPassWord) {
+        ResultInfo resultInfo = new ResultInfo();
+
+        userService.updateUserPassWord(LoginUserUtil.releaseUserIdFromCookie(request), oldPassWord, newPassWord, confirmPassWord);
+
+        return resultInfo;
+
+    }
+
+    @RequestMapping("user/toPasswordPage")
+    public String toPasswordPage() {
+
+        return "user/password";
     }
 
 

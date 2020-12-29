@@ -7,5 +7,5 @@
 <script src="${ctx}/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
 <script src="${ctx}/js/lay-config.js" charset="utf-8"></script>
 <script type="text/javascript">
-    var ctx="${ctx}";
+    var ctx = "${ctx}";
 </script>
