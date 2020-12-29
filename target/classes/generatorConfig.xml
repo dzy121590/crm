@@ -9,7 +9,7 @@
         数据库驱动
             在左侧project边栏的External Libraries中找到mysql的驱动，右键选择copy path
     -->
-    <classPathEntry  location="D:\eclipse-jee-oxygen-3a-win32-x86_64\apache-maven-3.6.3\.m2\epository\mysql\mysql-connector-java\8.0.18\mysql-connector-java-8.0.18.jar"/>
+    <classPathEntry  location="E:\apache-maven-3.6.3\.m2\epository\mysql\mysql-connector-java\8.0.18\mysql-connector-java-8.0.18.jar"/>
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
 
