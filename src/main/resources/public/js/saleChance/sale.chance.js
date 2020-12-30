@@ -121,7 +121,45 @@ layui.use(['table', 'layer'], function () {
             type: 2,
             area: ["700px", "500px"],
             maxmin: true,
-            content: ctx + "/sale_chance/addSaleChancePage"
+            content: ctx + "/sale_chance/addOrUpdateSaleChancePage"
         })
+    }
+
+    /**
+     * 表格行 监听事件
+     * saleChances为table标签的lay-filter 属性值
+     */
+    table.on('tool(saleChances)',
+        function (obj) {
+            var data = obj.data;// 获得当前行数据
+            var layEvent = obj.event; // 获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            // 判断事件类型
+            if (layEvent === 'edit') { // 编辑操作
+                // 获取当前要修改的行的id
+                var saleChanceId = data.id;
+                // 点击表格行的编辑按钮，打开更新营销机会的对话框
+                openAddOrUpdateSaleChanceDialog(saleChanceId);
+            }
+        })
+
+    /**
+     * 打开添加营销机会的对话框
+     */
+    function openAddOrUpdateSaleChanceDialog(saleChanceId) {
+        var title = "<h2>营销机会管理 - 机会添加</h2>";
+        var url = ctx + "/sale_chance/addOrUpdateSaleChancePage";
+        // 通过id判断是添加操作还是修改操作
+        if (saleChanceId) {
+        // 如果id不为空，则为修改操作
+            title = "<h2>营销机会管理 - 机会更新</h2>";
+            url = url + "?id=" + saleChanceId;
+        }
+        layui.layer.open({
+            title: title,
+            type: 2,
+            content: url,
+            area: ["500px", "620px"],
+            maxmin: true
+        });
     }
 });

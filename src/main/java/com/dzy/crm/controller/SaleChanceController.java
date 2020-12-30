@@ -8,6 +8,7 @@ import com.dzy.crm.service.UserService;
 import com.dzy.crm.utils.LoginUserUtil;
 import com.dzy.crm.vo.SaleChance;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -49,6 +50,9 @@ public class SaleChanceController extends BaseController {
         return "saleChance/sale_chance";
     }
 
+    /**
+     * 添加操作
+     */
     @RequestMapping("save")
     @ResponseBody
     public ResultInfo saveSaleChance(HttpServletRequest request, SaleChance saleChance) {
@@ -59,9 +63,23 @@ public class SaleChanceController extends BaseController {
         return success("添加成功!");
     }
 
-    @RequestMapping("addSaleChancePage")
-    public String addSaleChancePage(){
+    /**
+     * 更新操作
+     */
+    @RequestMapping("update")
+    @ResponseBody
+    public ResultInfo updateSaleChance(SaleChance saleChance) {
 
+        saleChanceService.updateSaleChance(saleChance);
+
+        return success("更新成功!");
+    }
+
+    @RequestMapping("addOrUpdateSaleChancePage")
+    public String addOrUpdateSaleChancePage(Integer id, Model model) {
+        if (null != id) {
+            model.addAttribute("saleChance", saleChanceService.selectByPrimaryKey(id));
+        }
         return "saleChance/add_update";
     }
 }

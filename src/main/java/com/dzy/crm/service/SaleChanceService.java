@@ -65,5 +65,25 @@ public class SaleChanceService extends BaseService<SaleChance, Integer> {
 
     }
 
+    public void updateSaleChance(SaleChance saleChance) {
+        //参数校验
+        SaleChance temp = selectByPrimaryKey(saleChance.getId());
+        AssertUtil.isTrue(null == temp, "更新用户不存在！");
+        checkParams(saleChance.getCustomerName(), saleChance.getLinkMan(), saleChance.getLinkPhone());
+        saleChance.setUpdateDate(new Date());
+
+        if (StringUtils.isBlank(temp.getAssignMan()) && StringUtils.isNotBlank(saleChance.getAssignMan())) {
+            saleChance.setState(StateStatus.STATED.getType());
+            saleChance.setAssignTime(new Date());
+            saleChance.setDevResult(DevResult.DEVING.getStatus());
+        } else if (StringUtils.isNotBlank(temp.getAssignMan()) && StringUtils.isBlank(saleChance.getAssignMan())) {
+            saleChance.setState(StateStatus.UNSTATE.getType());
+            saleChance.setAssignTime(null);
+            saleChance.setDevResult(DevResult.UNDEV.getStatus());
+            saleChance.setAssignMan("");
+        }
+
+        AssertUtil.isTrue(updateByPrimaryKeySelective(saleChance) < 1, "更新失败！");
+    }
 
 }
