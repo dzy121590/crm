@@ -11,6 +11,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author 董志远
  */
@@ -77,6 +80,10 @@ public class UserService extends BaseService<User, Integer> {
         AssertUtil.isTrue(!(temp.getUserPwd().equals(Md5Util.encode(oldPassWord))),"密码不正确，请重新输入！");
         AssertUtil.isTrue(!(newPassWord.equals(confirmPassWord)),"两次输入的密码不一致");
         AssertUtil.isTrue((oldPassWord.equals(newPassWord)),"新密码不能与旧密码相同");
+    }
+
+    public List<Map<String,Object>> queryAllSales(){
+        return userMapper.queryAllSales();
     }
 
 }

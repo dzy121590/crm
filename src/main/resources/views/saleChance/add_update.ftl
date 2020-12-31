@@ -6,6 +6,8 @@
 <body class="childrenBody">
 <form class="layui-form" style="width:80%;">
     <input type="hidden" name="id" value="${(saleChance.id)!}">
+    <#--设置营销人员的ID-->
+    <input type="hidden" name="man" value="${(saleChance.assignMan)!}">
     <div class="layui-form-item layui-row layui-col-xs12">
         <label class="layui-form-label">客户名称</label>
         <div class="layui-input-block">

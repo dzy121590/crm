@@ -1,9 +1,12 @@
 package com.dzy.crm.dao;
 
 import com.dzy.crm.base.BaseMapper;
-import com.dzy.crm.base.BaseService;
+
 import com.dzy.crm.vo.User;
-import org.springframework.stereotype.Repository;
+
+
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -13,4 +16,5 @@ public interface UserMapper extends BaseMapper<User,Integer> {
 
     User queryUserByUserName(String userName);
 
+    List<Map<String,Object>> queryAllSales();
 }

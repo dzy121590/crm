@@ -3,6 +3,9 @@ package com.dzy.crm.dao;
 import com.dzy.crm.base.BaseMapper;
 import com.dzy.crm.vo.SaleChance;
 
+/**
+ * @author 董志远
+ */
 public interface SaleChanceMapper extends BaseMapper<SaleChance,Integer> {
     Integer deleteByPrimaryKey(Integer id);
 

@@ -5,7 +5,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class    BaseController {
+/**
+ * @author 董志远
+ */
+public class  BaseController {
 
 
     @ModelAttribute

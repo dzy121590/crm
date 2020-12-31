@@ -86,4 +86,12 @@ public class SaleChanceService extends BaseService<SaleChance, Integer> {
         AssertUtil.isTrue(updateByPrimaryKeySelective(saleChance) < 1, "更新失败！");
     }
 
+
+    public void deleSaleChance(Integer[] ids) {
+
+        AssertUtil.isTrue(null == ids || ids.length == 0, "请选择要删除的数据！");
+        AssertUtil.isTrue(saleChanceMapper.deleteBatch(ids) < 0, "数据删除失败！");
+
+    }
+
 }

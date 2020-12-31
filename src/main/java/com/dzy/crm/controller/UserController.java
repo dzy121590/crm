@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author 董志远
@@ -60,5 +62,10 @@ public class UserController {
         return "user/password";
     }
 
+    @ResponseBody
+    @RequestMapping("user/queryAllSales")
+    public List<Map<String,Object>> queryAllSales(){
+        return userService.queryAllSales();
+    }
 
 }
